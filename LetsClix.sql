@@ -96,6 +96,11 @@ create table Plano_Assinatura
 	,dt_ini_vigencia datetime
 	,dt_fim_vigencia datetime
 )
+ 
+ --alterando o campo preco para receber valores decimais
+ALTER TABLE Plano_Assinatura
+ALTER COLUMN preco decimal (4,2)
+
 
 -- definindo as pks
 
@@ -199,12 +204,18 @@ values
 	select * from Papel_Elenco
 
 insert into Plano_Assinatura
-values 
+values
 	('Plano Norte', 1, 28.2, GETDATE(), '20270508')
 	,('Plano Nordesde', 2, 20, GETDATE(), '20310212')
 	,('Plano Centro-Oeste', 3, 33.8, GETDATE(), '20230305')
 	,('Plano Sudeste', 4, 40, '20201129', '20251002')
-	,('Plano Sul', 5, 50, '20190915', '20350730')
+	,('Plano Sul', 5, 50.47, '20190915', '20350730')
+	
+	select * from Plano_Assinatura
+
+	--limpando a tabela Plano_Assinatura pra poder inserir os valores com os decimais
+	truncate table Plano_Assinatura
+	-- depois disso é só dar o insert de novo
 
 insert into Usuario
 values
