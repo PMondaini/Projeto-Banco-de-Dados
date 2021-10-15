@@ -270,6 +270,32 @@ values
 	,(81392163218, 'Rua Aristides Waltrick, 752, Copacabana', 'Lages', 'SC', 5)
 	,(93238130870, 'Rua Israel Ferreira Ferro, 104, Jardim Carombé', 'São Paulo', 'SP', 4)
 
+insert into Publisher
+values
+	('Warner Bros Global Publishing', 15835588000170, '20180810', '20250810')
+	,('Walt Disney Studios', 11575933000123, '20190105', '20220105')
+	,('Universal Pictures', 17920690001680, '20190613', '20230613')
+	,('Paramount Pictures', 88749680001590, '20200707', '20300707')
+	,('Sony Pictures', 95791958000154, '20150103', '20220103')
+	,('Lionsgate Films', 40664105000160, '20160404', '20270404')
+	,('Metro-Goldwyn-Mayer Pictures', 82282489000104, '20200414', '20250414')
+	,('Constantin Film', 66265544000193, '20180822', '20290822')
+	,('DreamWorks Pictures', 75340550000159, '20171010', '20231010')
+	,('20th Century Studios', 75340550000159, '20181103', '20281103')
 
+	select * from Publisher
 
+insert into Genero
+values
+	('Ação')
+	,('Romance')
+	,('Drama')
+	,('Ficção Cientifica')
+	,('Fantasia')
+	,('Terror')
+	,('Horror')
+	,('Aventura')
+	,('Policial')
+	,('Comédia')
 
+	select * from Genero
