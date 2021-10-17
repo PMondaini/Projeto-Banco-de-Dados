@@ -1241,7 +1241,7 @@ group by u.id_regiao,pa.id_regiao,preco
 order by receita, qtd
 
 
-select
+select top 10
 	ve.id_elenco
 	,e.nome
 	,e.id
@@ -1251,5 +1251,5 @@ inner join Elenco e
 	on e.id = ve.id_elenco
 	where e.id_papel like (1) -- seleciona somente os diretores
 group by e.nome,ve.id_elenco, e.id
-order by qtd desc
+order by qtd desc 
 
