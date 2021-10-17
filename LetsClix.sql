@@ -1229,8 +1229,11 @@ order by id_classificacao asc
 select * from Publisher
 order by nome asc
 
+select *
+,count(*) as qtd
+from Plano_Assinatura
+group by id_Regiao
 	
-
 
 
 
