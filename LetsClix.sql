@@ -1229,11 +1229,27 @@ order by id_classificacao asc
 select * from Publisher
 order by nome asc
 
-select *
-,count(*) as qtd
-from Plano_Assinatura
-group by id_Regiao
-	
+select 
+	u.id_Regiao
+	,pa.preco
+	,sum(pa.preco) as receita
+	,count(u.id_regiao) as qtd
+from Usuario u
+inner join Plano_Assinatura pa
+	on u.id_Regiao = pa.id_regiao
+group by u.id_regiao,pa.id_regiao,preco
+order by receita, qtd
 
 
+select
+	ve.id_elenco
+	,e.nome
+	,e.id
+	,sum(e.id_papel) as qtd
+from Video_Elenco ve
+inner join Elenco e
+	on e.id = ve.id_elenco
+	where e.id_papel like (1) -- seleciona somente os diretores
+group by e.nome,ve.id_elenco, e.id
+order by qtd desc
 
