@@ -1215,3 +1215,10 @@ values
 	,(100, 50)
 
 select * from Video_Elenco
+
+select * from Video
+order by id_classificacao asc
+
+select * from Publisher
+order by nome asc
+
