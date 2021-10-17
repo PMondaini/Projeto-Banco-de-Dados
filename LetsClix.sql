@@ -103,7 +103,6 @@ ALTER COLUMN preco decimal (4,2)
 
 
 -- definindo as pks
-
 alter table Plano_Usuario
 add constraint PK_PLANO_USUARIO primary key (id)
 
@@ -140,8 +139,8 @@ add constraint PK_USUARIO primary key (id)
 alter table Plano_Assinatura
 add constraint PK_PLANO_ASSINATURA primary key (id)
 
--- definindo as fks
 
+-- definindo as fks
 alter table Elenco
 add constraint FK_ELENCO_1 foreign key (id_papel) REFERENCES Papel_Elenco (id)
 
@@ -173,9 +172,6 @@ alter table Plano_Assinatura
 add constraint FK_PLANO_ASSINATURA_1 foreign key (id_regiao) REFERENCES Regiao (id)
 
 -- inserindo valores nas tabelas 
-
-
-
 insert into Regiao
 values 
 	('Norte')
@@ -184,7 +180,7 @@ values
 	,('Sudeste')
 	,('Sul')
 
-	select * from Regiao
+select * from Regiao
 
 insert into Classificacao
 values
@@ -194,14 +190,14 @@ values
 	,('16')
 	,('18')
 	
-	select * from Classificacao
+select * from Classificacao
 
 insert into Papel_Elenco
 values
 	('Diretor(a)')
 	,('Ator/Atriz')
 
-	select * from Papel_Elenco
+select * from Papel_Elenco
 
 insert into Plano_Assinatura
 values
@@ -211,11 +207,11 @@ values
 	,('Plano Sudeste', 4, 40, '20201129', '20251002')
 	,('Plano Sul', 5, 50.47, '20190915', '20350730')
 	
-	select * from Plano_Assinatura
+select * from Plano_Assinatura
 
-	--limpando a tabela Plano_Assinatura pra poder inserir os valores com os decimais
-	truncate table Plano_Assinatura
-	-- depois disso é só dar o insert de novo
+--limpando a tabela Plano_Assinatura pra poder inserir os valores com os decimais
+truncate table Plano_Assinatura
+-- depois disso é só dar o insert de novo
 
 insert into Usuario
 values
@@ -283,7 +279,7 @@ values
 	,('DreamWorks Pictures', 75340550000159, '20171010', '20231010')
 	,('20th Century Studios', 75340550000159, '20181103', '20281103')
 
-	select * from Publisher
+select * from Publisher
 
 insert into Genero
 values
@@ -298,7 +294,7 @@ values
 	,('Policial')
 	,('Comédia')
 
-	select * from Genero
+select * from Genero
 
 insert into Video
 values
@@ -402,7 +398,6 @@ values
 ,(3,4,6,'Tubarão','Um terrível ataque a banhistas é o sinal de que a praia da pequena cidade de Amity, na Nova Inglaterra, virou refeitório de um gigantesco tubarão branco. O chefe de polícia Martin Brody quer fechar as praias, mas o prefeito Larry Vaughn não permite.','19750720',7440)
 ,(3,4,10,'Clube dos Cinco','Cinco adolescentes do ensino médio cometem pequenos delitos na escola e, como punição, têm que passar o sábado no colégio e escrever uma redação contando o que pensam de si mesmos. O grupo reúne jovens com perfis completamente diferentes.','19850628',5820)
 ,(10,3,3,'butch Cassidy','Dois amigos inseparáveis, Butch Cassidy e Sundance Kid,lideram o Bando do Buraco na Parede e vivem de assaltar trens e bancos.Quando são caçados por todo o país resolvem ir para a Bolívia.','19690824', 6600)
-
 
 select * from Video
 
@@ -965,3 +960,258 @@ values
 	,(22, 35, null)
 
 select * from Historico_Usuario
+
+insert into Video_Elenco
+values
+	 (22, 22)
+	,(71, 39)
+	,(74, 25)
+	,(33, 8)
+	,(58, 44)
+	,(83, 20)
+	,(6, 43)
+	,(10, 20)
+	,(84, 25)
+	,(16, 29)
+	,(94, 26)
+	,(45, 45)
+	,(5, 22)
+	,(69, 50)
+	,(29, 11)
+	,(67, 19)
+	,(23, 8)
+	,(17, 20)
+	,(82, 17)
+	,(49, 15)
+	,(93, 2)
+	,(5, 5)
+	,(50, 34)
+	,(36, 10)
+	,(35, 31)
+	,(9, 15)
+	,(15, 21)
+	,(29, 36)
+	,(100, 41)
+	,(73, 16)
+	,(81, 17)
+	,(88, 19)
+	,(21, 23)
+	,(17, 46)
+	,(69, 36)
+	,(58, 25)
+	,(2, 44)
+	,(64, 46)
+	,(47, 18)
+	,(40, 19)
+	,(8, 25)
+	,(66, 34)
+	,(13, 19)
+	,(24, 41)
+	,(87, 23)
+	,(1, 50)
+	,(62, 9)
+	,(49, 31)
+	,(16, 35)
+	,(89, 3)
+	,(50, 23)
+	,(52, 33)
+	,(4, 30)
+	,(28, 14)
+	,(78, 19)
+	,(25, 33)
+	,(43, 18)
+	,(24, 16)
+	,(68, 10)
+	,(24, 43)
+	,(21, 18)
+	,(5, 12)
+	,(31, 29)
+	,(89, 43)
+	,(40, 2)
+	,(77, 39)
+	,(3, 18)
+	,(89, 32)
+	,(98, 1)
+	,(64, 28)
+	,(9, 49)
+	,(4, 26)
+	,(21, 38)
+	,(58, 14)
+	,(95, 9)
+	,(93, 48)
+	,(45, 3)
+	,(84, 7)
+	,(42, 15)
+	,(34, 23)
+	,(71, 22)
+	,(88, 37)
+	,(60, 24)
+	,(18, 4)
+	,(46, 31)
+	,(34, 34)
+	,(56, 35)
+	,(76, 13)
+	,(32, 27)
+	,(2, 28)
+	,(1, 31)
+	,(90, 12)
+	,(11, 41)
+	,(34, 21)
+	,(51, 38)
+	,(22, 35)
+	,(68, 10)
+	,(84, 33)
+	,(10, 16)
+	,(91, 37)
+	,(58, 25)
+	,(82, 17)
+	,(83, 14)
+	,(41, 38)
+	,(30, 30)
+	,(83, 44)
+	,(27, 40)
+	,(45, 5)
+	,(55, 33)
+	,(63, 40)
+	,(14, 39)
+	,(57, 36)
+	,(40, 33)
+	,(100, 19)
+	,(87, 5)
+	,(16, 1)
+	,(63, 14)
+	,(97, 26)
+	,(80, 28)
+	,(41, 43)
+	,(42, 30)
+	,(13, 46)
+	,(93, 17)
+	,(43, 45)
+	,(74, 37)
+	,(12, 23)
+	,(68, 7)
+	,(61, 41)
+	,(93, 5)
+	,(95, 9)
+	,(27, 2)
+	,(89, 10)
+	,(45, 41)
+	,(26, 50)
+	,(83, 47)
+	,(31, 50)
+	,(25, 39)
+	,(38, 28)
+	,(64, 33)
+	,(80, 4)
+	,(23, 6)
+	,(64, 7)
+	,(99, 36)
+	,(35, 26)
+	,(68, 8)
+	,(59, 35)
+	,(62, 12)
+	,(59, 20)
+	,(71, 47)
+	,(47, 6)
+	,(9, 22)
+	,(6, 40)
+	,(44, 7)
+	,(20, 45)
+	,(75, 4)
+	,(18, 14)
+	,(31, 44)
+	,(96, 8)
+	,(40, 39)
+	,(21, 37)
+	,(47, 38)
+	,(32, 34)
+	,(36, 31)
+	,(38, 2)
+	,(20, 50)
+	,(84, 36)
+	,(19, 34)
+	,(99, 40)
+	,(6, 42)
+	,(69, 44)
+	,(52, 23)
+	,(76, 31)
+	,(98, 16)
+	,(39, 37)
+	,(27, 22)
+	,(99, 48)
+	,(73, 37)
+	,(66, 17)
+	,(12, 20)
+	,(45, 42)
+	,(76, 9)
+	,(70, 38)
+	,(24, 24)
+	,(9, 32)
+	,(90, 9)
+	,(10, 28)
+	,(8, 18)
+	,(22, 1)
+	,(100, 36)
+	,(70, 3)
+	,(23, 32)
+	,(77, 39)
+	,(1, 45)
+	,(99, 23)
+	,(3, 33)
+	,(67, 34)
+	,(40, 43)
+	,(11, 18)
+	,(76, 50)
+	,(37, 26)
+	,(23, 39)
+	,(85, 6)
+	,(33, 22)
+	,(87, 20)
+	,(52, 33)
+	,(34, 21)
+	,(69, 21)
+	,(61, 7)
+	,(41, 47)
+	,(75, 18)
+	,(49, 32)
+	,(61, 13)
+	,(50, 22)
+	,(17, 12)
+	,(24, 44)
+	,(26, 1)
+	,(35, 10)
+	,(82, 23)
+	,(79, 34)
+	,(45, 29)
+	,(3, 31)
+	,(94, 20)
+	,(32, 14)
+	,(100, 50)
+	,(26, 50)
+	,(95, 42)
+	,(25, 2)
+	,(2, 30)
+	,(17, 30)
+	,(61, 46)
+	,(27, 33)
+	,(15, 33)
+	,(39, 17)
+	,(6, 25)
+	,(60, 8)
+	,(34, 38)
+	,(49, 9)
+	,(33, 45)
+	,(70, 12)
+	,(94, 12)
+	,(44, 9)
+	,(98, 13)
+	,(93, 22)
+	,(76, 17)
+	,(19, 11)
+	,(30, 10)
+	,(6, 27)
+	,(31, 19)
+	,(46, 15)
+	,(100, 50)
+
+select * from Video_Elenco
