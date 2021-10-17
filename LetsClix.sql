@@ -171,6 +171,13 @@ add constraint FK_USUARIO_1 foreign key (id_regiao) REFERENCES Regiao (id)
 alter table Plano_Assinatura
 add constraint FK_PLANO_ASSINATURA_1 foreign key (id_regiao) REFERENCES Regiao (id)
 
+alter table Plano_Usuario
+add constraint FK_PLANO_USUARIO_1 foreign key (id_plano) REFERENCES Plano_Assinatura(id)
+
+alter table Plano_Usuario
+add constraint FK_PLANO_USUARIO_2 foreign key (id_usuario) REFERENCES Usuario(id)
+
+
 -- inserindo valores nas tabelas 
 insert into Regiao
 values 
@@ -1221,4 +1228,9 @@ order by id_classificacao asc
 
 select * from Publisher
 order by nome asc
+
+	
+
+
+
 
