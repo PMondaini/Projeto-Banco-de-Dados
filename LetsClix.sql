@@ -462,7 +462,7 @@ values
 	,('Orson Welles', 1, 'https://br.web.img2.acsta.net/pictures/15/09/16/18/25/374696.jpg')
 
 select * from Elenco
-
+truncate table Historico_Usuario
 insert into Historico_Usuario
 values
 	 (49, 36, 543)
@@ -541,7 +541,7 @@ values
 	,(29, 42, 2586)
 	,(44, 50, 891)
 	,(27, 3, 4351)
-	,(76, 2, 10687)
+	,(76, 2, 9687)
 	,(54, 42, null)
 	,(82, 18, 7552)
 	,(68, 1, 3124)
@@ -825,7 +825,7 @@ values
 	,(81, 17, 5486)
 	,(65, 8, 81)
 	,(47, 37, 7698)
-	,(50, 3, 10715)
+	,(50, 3, 7015)
 	,(33, 38, null)
 	,(2, 19, 10003)
 	,(73, 21, 6586)
@@ -858,7 +858,7 @@ values
 	,(87, 33, 528)
 	,(41, 47, 4247)
 	,(12, 48, 6680)
-	,(48, 24, 10783)
+	,(48, 24, 5753)
 	,(65, 11, 739)
 	,(25, 32, null)
 	,(29, 17, 8236)
@@ -899,7 +899,7 @@ values
 	,(47, 25, 8118)
 	,(59, 5, 470)
 	,(29, 36, 1558)
-	,(12, 21, 10644)
+	,(12, 21, 4644)
 	,(4, 45, 1232)
 	,(71, 1, 42)
 	,(54, 46, 9509)
@@ -1278,12 +1278,18 @@ values
 
 select * from Plano_Usuario
 
+--Relatórios
+
+--Listar a quantidade de filmes para cada faixa etária
 select * from Video
 order by id_classificacao asc
 
+--Listar a quantidade de filmes que cada publisher possui
 select * from Publisher
 order by nome asc
 
+
+--Listar o faturamento por plano
 select
 	pu.id_plano
 	,count(pu.id_plano) as qtd
@@ -1295,6 +1301,7 @@ group by pa.id_regiao, pu.id_plano
 order by receita, qtd
 
 
+--Listar os 10 diretores com mais filmes
 select top 10
 	ve.id_elenco
 	,e.nome
@@ -1306,4 +1313,46 @@ inner join Elenco e
 	where e.id_papel like (1) -- seleciona somente os diretores
 group by e.nome,ve.id_elenco, e.id
 order by qtd desc 
+
+--Listar os 10 filmes mais assistidos
+select top 10
+	h.id_video
+	,v.nome
+	,v.id
+	,count(h.id_video) as qtd_assistida
+from Historico_Usuario h
+inner join Video v
+	on v.id = h.id_video
+group by v.nome, v.id, h.id_video
+order by qtd_assistida desc 
+
+--Listar os 5 filmes com menor indice de retenção, que é quando começam a assistir e param 
+--(usar o os filmes com menor qtdAssistidos)
+select top 5
+	 h.id_video
+	,h.qtdSegundosAssistidos
+	,v.nome
+	,h.id as id_hist
+from Historico_Usuario h
+join Video v
+	on v.id = h.id_video
+	where qtdSegundosAssistidos is not null
+group by v.nome, h.id_video, h.qtdSegundosAssistidos, h.id
+order by qtdSegundosAssistidos asc
+
+--Listar os 5 filmes com maior indice de retenção, que é quando começam a assistir e terminam
+--(usar o os filmes com o maior qtdSegundosAssistidos ou se ele for nulo, considerar a duracao do video)
+select top 5
+	 h.id_video
+	,h.qtdSegundosAssistidos
+	,h.id as id_hist
+	,v.nome
+	,v.duracao_segundos
+from Historico_Usuario h
+join Video v
+	on v.id = h.id_video
+	where qtdSegundosAssistidos is null or qtdSegundosAssistidos > 9000
+group by v.nome, h.id_video, h.qtdSegundosAssistidos, v.duracao_segundos, h.id
+order by h.qtdSegundosAssistidos desc, v.duracao_segundos desc
+
 
