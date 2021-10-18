@@ -1223,21 +1223,75 @@ values
 
 select * from Video_Elenco
 
+insert into Plano_Usuario
+values
+(1,1,'20210103')
+,(2,2,'20221010')
+,(3,3,'20230810')
+,(4,4,'20211010')
+,(5,5,'20210908')
+,(1,6,'20221010')
+,(2,7,'20221010')
+,(3,8,'20221010')
+,(4,9,'20221010')
+,(5,10,'20221010')
+,(1,11,'20221010')
+,(2,12,'20221010')
+,(3,13,'20221010')
+,(4,14,'20221010')
+,(5,15,'20221010')
+,(1,16,'20221010')
+,(2,17,'20221010')
+,(3,18,'20221010')
+,(4,19,'20221010')
+,(5,20,'20221010')
+,(1,21,'20221010')
+,(2,22,'20221010')
+,(3,23,'20221010')
+,(4,24,'20221010')
+,(5,25,'20221010')
+,(1,26,'20221010')
+,(2,27,'20221010')
+,(3,28,'20221010')
+,(4,29,'20221010')
+,(5,30,'20221010')
+,(1,31,'20221010')
+,(2,32,'20221010')
+,(3,33,'20221010')
+,(4,34,'20221010')
+,(5,35,'20221010')
+,(1,36,'20221010')
+,(2,37,'20221010')
+,(3,38,'20221010')
+,(4,39,'20221010')
+,(5,40,'20221010')
+,(1,41,'20221010')
+,(2,42,'20221010')
+,(3,43,'20221010')
+,(4,44,'20221010')
+,(5,45,'20221010')
+,(1,46,'20221010')
+,(2,47,'20221010')
+,(3,48,'20221010')
+,(5,49,'20221010')
+,(1,50,'20221010')
+
+select * from Plano_Usuario
+
 select * from Video
 order by id_classificacao asc
 
 select * from Publisher
 order by nome asc
 
-select 
-	u.id_Regiao
-	,pa.preco
+select
+	pu.id_plano
+	,count(pu.id_plano) as qtd
 	,sum(pa.preco) as receita
-	,count(u.id_regiao) as qtd
-from Usuario u
+from Plano_Usuario pu
 inner join Plano_Assinatura pa
-	on u.id_Regiao = pa.id_regiao
-group by u.id_regiao,pa.id_regiao,preco
+	on pu.id_plano = pa.id
+group by pa.id_regiao, pu.id_plano
 order by receita, qtd
 
 
@@ -1245,7 +1299,7 @@ select top 10
 	ve.id_elenco
 	,e.nome
 	,e.id
-	,sum(e.id_papel) as qtd
+	,count(e.id_papel) as qtd
 from Video_Elenco ve
 inner join Elenco e
 	on e.id = ve.id_elenco
