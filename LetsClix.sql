@@ -1288,7 +1288,6 @@ order by id_classificacao asc
 select * from Publisher
 order by nome asc
 
-
 --Listar o faturamento por plano
 select
 	pu.id_plano
@@ -1299,7 +1298,6 @@ inner join Plano_Assinatura pa
 	on pu.id_plano = pa.id
 group by pa.id_regiao, pu.id_plano
 order by receita, qtd
-
 
 --Listar os 10 diretores com mais filmes
 select top 10
@@ -1354,5 +1352,38 @@ join Video v
 	where qtdSegundosAssistidos is null or qtdSegundosAssistidos > 9000
 group by v.nome, h.id_video, h.qtdSegundosAssistidos, v.duracao_segundos, h.id
 order by h.qtdSegundosAssistidos desc, v.duracao_segundos desc
+
+--Listar os 10 atores com mais filmes
+select top 10
+    ve.id_elenco
+    ,e.nome
+    ,e.id
+    ,count(e.id_papel) as qtd
+from Video_Elenco ve
+inner join Elenco e
+    on e.id = ve.id_elenco
+    where e.id_papel like (2) -- seleciona somente os atores
+group by e.nome,ve.id_elenco, e.id
+order by qtd desc 
+
+-- Listar todos os filmes com sua classificacao e idade minima
+select v.nome, c.id, c.idade_minima from Video v
+join Classificacao c
+	on v.id_classificacao = c.id
+order by idade_minima
+
+--Listar a quantidade de generos produzidos por cada publisher
+select p.nome, p.id, count(distinct g.id) as qtd_genero from Video v
+join Publisher p
+	on v.id_publisher = p.id
+join Genero g
+	on v.id_genero = g.id
+group by p.nome, p.id
+order by p.id
+
+--Listar publishers ordenados por data de fim do contrato mais proximas (menores)
+select * from Publisher
+order by dt_fim_contrato asc
+
 
 
