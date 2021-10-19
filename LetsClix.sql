@@ -1332,15 +1332,17 @@ order by qtd_assistida desc
 
 --Listar os 3 gêneros mais assistidos
 select top 3
-       ge.id
-       ,ge.nome
-       ,ge.id
-       ,count(h.id_genero) as qtd
-from Historico_Usuario h
-inner join Genero ge
-       on ge.id=h.id_genero
-group by ge.nome, ge.id, h.id_genero
-order by qtd desc
+	g.id
+	,g.nome 
+	,count(v.id_genero) as qtd_Assistido 
+	from Video v
+join Historico_Usuario h
+	on h.id_video = v.id
+join Genero g
+	on v.id_genero = g.id
+group by g.id, g.nome
+order by g.id desc
+
 
 --Listar os 5 filmes com menor indice de retenção, que é quando começam a assistir e param 
 --(usar o os filmes com menor qtdAssistidos)
