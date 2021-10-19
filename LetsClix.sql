@@ -1281,12 +1281,18 @@ select * from Plano_Usuario
 --Relatórios
 
 --Listar a quantidade de filmes para cada faixa etária
-select * from Video
-order by id_classificacao asc
+select c.id, c.idade_minima, count(distinct v.id) as qtd_Filmes from Video v
+join Classificacao c	
+	on v.id_classificacao = c.id
+group by c.id, c.idade_minima
+order by c.id
 
 --Listar a quantidade de filmes que cada publisher possui
-select * from Publisher
-order by nome asc
+select v.id_publisher, p.nome, count(distinct v.id) as qtd_Filmes from Video v
+join Publisher p
+	on v.id_publisher = p.id
+group by v.id_publisher, p.nome
+order by v.id_publisher
 
 --Listar o faturamento por plano
 select
@@ -1326,7 +1332,7 @@ order by qtd_assistida desc
 
 --Listar os 3 gêneros mais assistidos
 select top 3
-       ge.id_genero
+       ge.id
        ,ge.nome
        ,ge.id
        ,count(h.id_genero) as qtd
@@ -1334,7 +1340,7 @@ from Historico_Usuario h
 inner join Genero ge
        on ge.id=h.id_genero
 group by ge.nome, ge.id, h.id_genero
-order by qtd_assistida desc
+order by qtd desc
 
 --Listar os 5 filmes com menor indice de retenção, que é quando começam a assistir e param 
 --(usar o os filmes com menor qtdAssistidos)
