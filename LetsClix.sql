@@ -234,7 +234,6 @@ values
 ,(5,49,'20221010')
 ,(1,50,'20221010')
 
-select * from Plano_Usuario
 
 insert into Publisher
 values
@@ -249,14 +248,12 @@ values
 	,('DreamWorks Pictures', 75340550000159, '20171010', '20231010')
 	,('20th Century Studios', 75340550000159, '20181103', '20281103')
 
-select * from Publisher
 
 insert into Papel_Elenco
 values
 	('Diretor(a)')
 	,('Ator/Atriz')
 
-select * from Papel_Elenco
 
 insert into Elenco
 values
@@ -311,7 +308,6 @@ values
 	,('Victor Fleming', 1, 'https://cdn.britannica.com/34/176934-050-31E2C221/Victor-Fleming-Clark-Gable-Vivien-Leigh-Gone.jpg')
 	,('Orson Welles', 1, 'https://br.web.img2.acsta.net/pictures/15/09/16/18/25/374696.jpg')
 
-select * from Elenco
 
 insert into Genero
 values
@@ -326,7 +322,6 @@ values
 	,('Policial')
 	,('Comédia')
 
-select * from Genero
 
 insert into Classificacao
 values
@@ -336,7 +331,6 @@ values
 	,('16')
 	,('18')
 	
-select * from Classificacao
 
 insert into Video
 values
@@ -441,7 +435,6 @@ values
 ,(3,4,10,'Clube dos Cinco','Cinco adolescentes do ensino médio cometem pequenos delitos na escola e, como punição, têm que passar o sábado no colégio e escrever uma redação contando o que pensam de si mesmos. O grupo reúne jovens com perfis completamente diferentes.','19850628',5820)
 ,(10,3,3,'butch Cassidy','Dois amigos inseparáveis, Butch Cassidy e Sundance Kid,lideram o Bando do Buraco na Parede e vivem de assaltar trens e bancos.Quando são caçados por todo o país resolvem ir para a Bolívia.','19690824', 6600)
 
-select * from Video
 
 insert into Video_Elenco
 values
@@ -696,7 +689,6 @@ values
 	,(46, 15)
 	,(100, 50)
 
-select * from Video_Elenco
 
 -- truncate table Historico_Usuario
 insert into Historico_Usuario
@@ -1202,7 +1194,6 @@ values
 	,(31, 23, 3228)
 	,(22, 35, null)
 
-select * from Historico_Usuario
 
 insert into Regiao
 values 
@@ -1212,7 +1203,6 @@ values
 	,('Sudeste')
 	,('Sul')
 
-select * from Regiao
 
 insert into Usuario
 values
@@ -1275,13 +1265,43 @@ values
 	,('Plano Sudeste', 4, 40, '20201129', '20251002')
 	,('Plano Sul', 5, 50.47, '20190915', '20350730')
 	
-select * from Plano_Assinatura
-
 --limpando a tabela Plano_Assinatura pra poder inserir os valores com os decimais
 --truncate table Plano_Assinatura
 -- depois disso é só dar o insert de novo
 
+-- select
+select * from Plano_Usuario
+
+select * from Publisher
+
+select * from Papel_Elenco
+
+select * from Elenco
+
+select * from Genero
+
+select * from Classificacao
+
+select * from Video
+
+select * from Video_Elenco
+
+select * from Historico_Usuario
+
+select * from Regiao
+
+select * from Usuario
+
+select * from Plano_Assinatura
+
+
 --Relatórios
+
+-- Listar todos os filmes com sua classificacao e idade minima
+select v.nome, c.id, c.idade_minima from Video v
+join Classificacao c
+	on v.id_classificacao = c.id
+order by idade_minima
 
 --Listar a quantidade de filmes para cada faixa etária
 select c.id, c.idade_minima, count(distinct v.id) as qtd_Filmes from Video v
@@ -1297,16 +1317,14 @@ join Publisher p
 group by v.id_publisher, p.nome
 order by v.id_publisher
 
---Listar o faturamento por plano
-select
-	pu.id_plano
-	,count(pu.id_plano) as qtd
-	,sum(pa.preco) as receita
-from Plano_Usuario pu
-inner join Plano_Assinatura pa
-	on pu.id_plano = pa.id
-group by pa.id_regiao, pu.id_plano
-order by receita, qtd
+--Listar a quantidade de generos produzidos por cada publisher
+select p.nome, p.id, count(distinct g.id) as qtd_genero from Video v
+join Publisher p
+	on v.id_publisher = p.id
+join Genero g
+	on v.id_genero = g.id
+group by p.nome, p.id
+order by p.id
 
 --Listar os 10 diretores com mais filmes
 select top 10
@@ -1318,6 +1336,19 @@ from Video_Elenco ve
 inner join Elenco e
 	on e.id = ve.id_elenco
 	where e.id_papel like (1) -- seleciona somente os diretores
+group by e.nome,ve.id_elenco, e.id
+order by qtd desc 
+
+--Listar os 10 atores com mais filmes
+select top 10
+    ve.id_elenco
+    ,e.nome
+    ,e.id
+    ,count(e.id_papel) as qtd
+from Video_Elenco ve
+inner join Elenco e
+    on e.id = ve.id_elenco
+    where e.id_papel like (2) -- seleciona somente os atores
 group by e.nome,ve.id_elenco, e.id
 order by qtd desc 
 
@@ -1345,7 +1376,6 @@ join Genero g
 	on v.id_genero = g.id
 group by g.id, g.nome
 order by g.id desc
-
 
 --Listar os 5 filmes com menor indice de retenção, que é quando começam a assistir e param 
 --(usar o os filmes com menor qtdAssistidos)
@@ -1376,37 +1406,18 @@ join Video v
 group by v.nome, h.id_video, h.qtdSegundosAssistidos, v.duracao_segundos, h.id
 order by h.qtdSegundosAssistidos desc, v.duracao_segundos desc
 
---Listar os 10 atores com mais filmes
-select top 10
-    ve.id_elenco
-    ,e.nome
-    ,e.id
-    ,count(e.id_papel) as qtd
-from Video_Elenco ve
-inner join Elenco e
-    on e.id = ve.id_elenco
-    where e.id_papel like (2) -- seleciona somente os atores
-group by e.nome,ve.id_elenco, e.id
-order by qtd desc 
-
--- Listar todos os filmes com sua classificacao e idade minima
-select v.nome, c.id, c.idade_minima from Video v
-join Classificacao c
-	on v.id_classificacao = c.id
-order by idade_minima
-
---Listar a quantidade de generos produzidos por cada publisher
-select p.nome, p.id, count(distinct g.id) as qtd_genero from Video v
-join Publisher p
-	on v.id_publisher = p.id
-join Genero g
-	on v.id_genero = g.id
-group by p.nome, p.id
-order by p.id
-
 --Listar publishers ordenados por data de fim do contrato mais proximas (menores)
 select * from Publisher
 order by dt_fim_contrato asc
 
-
+--Listar o faturamento por plano
+select
+	pu.id_plano
+	,count(pu.id_plano) as qtd
+	,sum(pa.preco) as receita
+from Plano_Usuario pu
+inner join Plano_Assinatura pa
+	on pu.id_plano = pa.id
+group by pa.id_regiao, pu.id_plano
+order by receita, qtd
 
