@@ -92,14 +92,14 @@ create table Plano_Assinatura
 	id int identity(1,1)
 	,codigo varchar (20)
 	,id_regiao int
-	,preco decimal
+	,preco decimal (4,2)
 	,dt_ini_vigencia datetime
 	,dt_fim_vigencia datetime
 )
  
  --alterando o campo preco para receber valores decimais
-ALTER TABLE Plano_Assinatura
-ALTER COLUMN preco decimal (4,2)
+--ALTER TABLE Plano_Assinatura
+--ALTER COLUMN preco decimal (4,2)
 
 
 -- definindo as pks
@@ -217,7 +217,7 @@ values
 select * from Plano_Assinatura
 
 --limpando a tabela Plano_Assinatura pra poder inserir os valores com os decimais
-truncate table Plano_Assinatura
+--truncate table Plano_Assinatura
 -- depois disso é só dar o insert de novo
 
 insert into Usuario
