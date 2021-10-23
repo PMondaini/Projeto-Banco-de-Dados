@@ -141,8 +141,27 @@ add constraint PK_PLANO_ASSINATURA primary key (id)
 
 
 -- definindo as fks
+
 alter table Elenco
 add constraint FK_ELENCO_1 foreign key (id_papel) REFERENCES Papel_Elenco (id)
+
+alter table Historico_Usuario
+add constraint FK_HISTORICO_USUARIO_1 foreign key (id_video) REFERENCES Video (id)
+
+alter table Historico_Usuario
+add constraint FK_HISTORICO_USUARIO_2 foreign key (id_usuario) REFERENCES Usuario (id)
+
+alter table Plano_Usuario
+add constraint FK_PLANO_USUARIO_1 foreign key (id_plano) REFERENCES Plano_Assinatura(id)
+
+alter table Plano_Usuario
+add constraint FK_PLANO_USUARIO_2 foreign key (id_usuario) REFERENCES Usuario(id)
+
+alter table Plano_Assinatura
+add constraint FK_PLANO_ASSINATURA_1 foreign key (id_regiao) REFERENCES Regiao (id)
+
+alter table Usuario
+add constraint FK_USUARIO_1 foreign key (id_regiao) REFERENCES Regiao (id)
 
 alter table Video
 add constraint FK_VIDEO_1 foreign key (id_publisher) REFERENCES Publisher (id)
@@ -158,24 +177,6 @@ add constraint FK_VIDEO_ELENCO_1 foreign key (id_elenco) REFERENCES Elenco (id)
 
 alter table Video_Elenco
 add constraint FK_VIDEO_ELENCO_2 foreign key (id_video) REFERENCES Video (id)
-
-alter table Historico_Usuario
-add constraint FK_HISTORICO_USUARIO_1 foreign key (id_video) REFERENCES Video (id)
-
-alter table Historico_Usuario
-add constraint FK_HISTORICO_USUARIO_2 foreign key (id_usuario) REFERENCES Usuario (id)
-
-alter table Usuario
-add constraint FK_USUARIO_1 foreign key (id_regiao) REFERENCES Regiao (id)
-
-alter table Plano_Assinatura
-add constraint FK_PLANO_ASSINATURA_1 foreign key (id_regiao) REFERENCES Regiao (id)
-
-alter table Plano_Usuario
-add constraint FK_PLANO_USUARIO_1 foreign key (id_plano) REFERENCES Plano_Assinatura(id)
-
-alter table Plano_Usuario
-add constraint FK_PLANO_USUARIO_2 foreign key (id_usuario) REFERENCES Usuario(id)
 
 
 -- inserindo valores nas tabelas 
