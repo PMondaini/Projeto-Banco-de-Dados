@@ -462,7 +462,7 @@ values
 	,('Orson Welles', 1, 'https://br.web.img2.acsta.net/pictures/15/09/16/18/25/374696.jpg')
 
 select * from Elenco
-truncate table Historico_Usuario
+-- truncate table Historico_Usuario
 insert into Historico_Usuario
 values
 	 (49, 36, 543)
